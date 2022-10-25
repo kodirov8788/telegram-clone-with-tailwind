@@ -12,7 +12,7 @@ import { signOut } from "firebase/auth"
 
 function Navbar() {
   const { currentUser } = useContext(UserContextApi)
-  console.log(currentUser)
+  // console.log(currentUser)
 
   let stl = {
     size: "sticky z-[110] top-0 w-full h-[80px] bg-gradient-to-r from-[#E66346] to-[#98508E]",

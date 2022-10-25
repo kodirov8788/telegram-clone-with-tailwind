@@ -1,37 +1,53 @@
 import Navbar from "./Components/Navbar.js";
 import New from "./Components/New Products/New.js";
 import Payment from "./Components/Payment/Payment.js";
-// import TopSlider from "./Components/Top_Slider.js";
 import Trending from "./Components/Trending Products/Trending.js";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContextApi } from "./context/UserContext"
-import { Route, Router, Routes } from "react-router-dom";
-import Admin from "./Pages/Admin.js";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "./firebase/firebaseConfig"
 function App() {
   const { currentUser } = useContext(UserContextApi)
+  const [document, setDocument] = useState([])
+  console.log(document)
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     await axios
+  //       .get("https://fakestoreapi.com/products")
+  //       .then((res) => setData(res.data))
+  //       .catch((err) => console.log(err));
+  //   };
 
+  //   return () => {
+  //     getData();
+  //   };
+  // }, []);
 
-  const [data, setData] = useState([]);
   useEffect(() => {
     const getData = async () => {
-      await axios
-        .get("https://fakestoreapi.com/products")
-        .then((res) => setData(res.data))
-        .catch((err) => console.log(err));
-    };
+      onSnapshot(
+        collection(db, "products"),
+        (snapshot) => {
+          setDocument(snapshot.docs.map(doc => doc.data()))
+        },
+        (error) => {
+          console.log(error)
+        });
 
-    return () => {
-      getData();
-    };
-  }, []);
+    }
+    getData()
+  }, [])
+
+
   return (
     <div className="App">
       <Navbar />
       {/* <TopSlider /> */}
-      <Trending data={data} />
-      <New data={data} />
-      <Payment data={data} />
+      <Trending data={document} />
+      <New data={document} />
+      <Payment data={document} />
 
 
     </div>

@@ -8,7 +8,7 @@ export const UserContextProvider = ({ children }) => {
 
 
     const [currentUser, setCurrentUser] = useState(null)
-    console.log(currentUser)
+    // console.log(currentUser)
     // console.log("isAdmin >>", isAdmin)
 
 
