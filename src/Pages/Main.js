@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { GoThreeBars } from "react-icons/go";
 import { HiMagnifyingGlass } from "react-icons/hi2";
+import Main_Header from "../components/Main_Header";
+import Main_Input from "../components/Main_Input";
+import Main_Message from "../components/Main_Message";
 import { Static } from "../static_data";
 
 function Main() {
@@ -49,8 +52,9 @@ function Main() {
         </div>
       </div>
       <div className={stl.content}>
-        <div className={stl.top}></div>
-        <div className={stl.msg}></div>
+        <Main_Header />
+        <Main_Message />
+        <Main_Input />
       </div>
     </div>
   );
